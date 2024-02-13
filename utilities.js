@@ -17,7 +17,7 @@ export async function addRandomBeerToDom(randomBeer) {
            <section class="cardAndButton">
            <div class="card">
            <img class="image" src="${beerCard.imgSrc}"/>
-           <h4 class="bear-name">${beerCard.name}</h4>
+           <h4 class="small-heading bear-name">${beerCard.name}</h4>
            <a class="seeMore" href="index.html#${beerCard.index}" id="${beerCard.index}"> See More 
            <span class="material-symbols-outlined">
                  keyboard_arrow_right
@@ -78,18 +78,18 @@ function addSingleBeerToDom(singleBeer) {
       return `
      <section class="info-container"> 
      <img src="${beerInfo.imgSrc}" class="image" alt="infoImg" />
-     <h2 class="heading">${beerInfo.name}, information </h2>
-     <p>${beerInfo.description}</p>
-     <h4 class="heading"> Details</h4>
-     <h6>- Abv(alcohol by volume), ${beerInfo.abv} %</h6>
-     <h6>- Volume, ${beerInfo.volume}</h6>
-     <h4> Ingredients (Yeast, malt and hops)</h4>
-     <h6> ${beerInfo.ingredients}</h6>
-     <h6> ${beerInfo.hops}</h6>
-     <h4> Food pairing</h4>
-     <p> ${beerInfo.food_pairing}</p>
-     <h4>Tips</h4>
-     <p> ${beerInfo.brewersTips}</p>
+     <h2 class="heading">${beerInfo.name}</h2>
+     <p class="info-text">${beerInfo.description}</p>
+     <h4 class="small-heading"> Details</h4>
+     <p class="info">- Abv(alcohol by volume), ${beerInfo.abv} %</p>
+     <p class="info">- Volume, ${beerInfo.volume}</p>
+     <h4 class="small-heading"> Ingredients (Yeast, malt and hops)</h4>
+     <p class="info"> ${beerInfo.ingredients}</p>
+     <p class="info"> ${beerInfo.hops}</p>
+     <h4 class="small-heading"> Food pairing</h4>
+     <p class="info-text"> ${beerInfo.food_pairing}</p>
+     <h4 class="small-heading">Tips</h4>
+     <p class="info-text"> ${beerInfo.brewersTips}</p>
      </section>`;
     })
     .join("");
