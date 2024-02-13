@@ -41,6 +41,6 @@ nav {
   display: flex;
   justify-content: column;
 }
-.blockTillUsed {
+.block {
   display: none;
-}
+} 
