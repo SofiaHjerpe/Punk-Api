@@ -2,7 +2,7 @@ import { pageContent } from "./randomBeer.js";
 import { fetchRandomBeer } from "./randomBeer.js";
 import { fetchSingleBeer } from "./infoPage.js";
 const infoPage = document.querySelector(".block");
-const ipageContent = document.getElementById("infoPage");
+
 export async function addRandomBeerToDom(randomBeer) {
   let getRandomBeerToDom = randomBeer
     .map((randomBeer) => {
@@ -17,8 +17,12 @@ export async function addRandomBeerToDom(randomBeer) {
            <section class="cardAndButton">
            <div class="card">
            <img class="image" src="${beerCard.imgSrc}"/>
-           <h6>${beerCard.name}</h6>
-           <a class="seeMore" href="index.html#${beerCard.index}" id="${beerCard.index}"> See more </a>
+           <h4 class="bear-name">${beerCard.name}</h4>
+           <a class="seeMore" href="index.html#${beerCard.index}" id="${beerCard.index}"> See More 
+           <span class="material-symbols-outlined">
+                 keyboard_arrow_right
+           </span>
+           </a>
           </div>
           <div class="buttonWrapper">
              <button class="button">Click me</button>
@@ -45,6 +49,7 @@ function updatePage() {
   infoPage.classList.remove("block");
   infoPage.classList.add("infoPage");
 }
+const ipageContent = document.querySelector(".infop");
 
 export function getSingleBeerWithId(beerId) {
   console.log(beerId);
@@ -63,30 +68,30 @@ function addSingleBeerToDom(singleBeer) {
         index: `${beer.id}`,
         description: `${beer.description}`,
         abv: `${beer.abv}`,
-        volume: `${beer.volume}`,
-        ingredients: `${beer.ingredients}`,
-        hops: `${beer.hops}`,
+        volume: `${beer.volume.value} ${beer.volume.unit}`,
+        ingredients: `${beer.ingredients.yeast}${beer.ingredients.malt[0].name} ${beer.ingredients.malt[0].amount.value} ${beer.ingredients.malt[0].amount.unit}`,
+        hops: `${beer.ingredients.hops[0].name} ${beer.ingredients.hops[0].amount.value} ${beer.ingredients.hops[0].amount.unit}, ${beer.ingredients.hops[1].name} ${beer.ingredients.hops[1].amount.value} ${beer.ingredients.hops[1].amount.unit}`,
         food_pairing: `${beer.food_pairing}`,
         brewersTips: `${beer.brewers_tips}`,
       };
+
       return `
      <section class="info-container"> 
-     <img src="${beerInfo.imgSrc}" class="infoImg" alt="infoImg" />
-     <h1>${beerInfo.name}, information </h1>
+     <img src="${beerInfo.imgSrc}" class="image" alt="infoImg" />
+     <h2 class="heading">${beerInfo.name}, information </h2>
      <p>${beerInfo.description}</p>
-     <h2> Details</h2>
-     <h6>- Abv(alcohol by volume), ${beerInfo.abv}</h6>
+     <h4 class="heading"> Details</h4>
+     <h6>- Abv(alcohol by volume), ${beerInfo.abv} %</h6>
      <h6>- Volume, ${beerInfo.volume}</h6>
-     <h2> Ingredients</h2>
+     <h4> Ingredients (Yeast, malt and hops)</h4>
      <h6> ${beerInfo.ingredients}</h6>
-     <h2> Hops</h2>
      <h6> ${beerInfo.hops}</h6>
-     <h2> Food pairing</h2>
-     <h6> ${beerInfo.food_pairing}</h6>
-      <h2> Tips</h2>
-     <h6> ${beerInfo.brewersTips}</h6>
+     <h4> Food pairing</h4>
+     <p> ${beerInfo.food_pairing}</p>
+     <h4>Tips</h4>
+     <p> ${beerInfo.brewersTips}</p>
      </section>`;
     })
     .join("");
-  ipageContent.innerHtml = singleBeerToDom;
+  ipageContent.insertAdjacentHTML("beforeend", singleBeerToDom);
 }

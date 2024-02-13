@@ -26,7 +26,7 @@ nav {
   border-color: transparent;
   border-radius: 4px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 16px 32px;
+  padding: 32px;
 }
 .image {
   width: 150px;
@@ -43,4 +43,42 @@ nav {
 }
 .block {
   display: none;
-} 
+}
+.info-container {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  max-width: 900px;
+}
+.heading {
+  margin-top: 20px;
+  font-family: "Inter", sans-serif;
+}
+h4 {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+.bear-name {
+  margin-bottom: 60px;
+}
+p {
+  font-family: "Inter", sans-serif;
+  line-height: 1.5em;
+}
+h6 {
+  font-family: "Inter", sans-serif;
+}
+.seeMore {
+  color: #000;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  text-decoration: none;
+  font-size: 12px;
+}
+.material-symbols-outlined {
+  font-size: 15px;
+}
