@@ -1,8 +1,8 @@
 import { pageContent } from "./randomBeer.js";
 import { fetchRandomBeer } from "./randomBeer.js";
-import { fetchSingleBeer } from "./infoPage.js";
-const infoPage = document.querySelector(".block");
 
+const infoPage = document.querySelector(".block");
+const baseURL = "https://api.punkapi.com/v2";
 export async function addRandomBeerToDom(randomBeer) {
   let getRandomBeerToDom = randomBeer
     .map((randomBeer) => {
@@ -11,7 +11,7 @@ export async function addRandomBeerToDom(randomBeer) {
         imgSrc: `${randomBeer.image_url}`,
         index: `${randomBeer.id}`,
       };
-      getSingleBeerWithId(beerCard.index);
+
       return `
            <nav><a>search</a></nav>
            <section class="cardAndButton">
@@ -32,31 +32,34 @@ export async function addRandomBeerToDom(randomBeer) {
     })
     .join("");
   pageContent.innerHTML = getRandomBeerToDom;
-  const button = document.querySelector(".button");
+
   const seeMore = document.querySelector(".seeMore");
-
-  seeMore.addEventListener("click", () => updatePage());
-  button.addEventListener("click", () => fetchOnButtonClick());
+  const button = document.querySelector(".button");
+  onButtonClick(button);
+  handleClickOnSeeMore(seeMore);
 }
-
-function fetchOnButtonClick() {
-  fetchRandomBeer("https://api.punkapi.com/v2/beers/random").then((randomBeer) => {
-    addRandomBeerToDom(randomBeer);
+function onButtonClick(button) {
+  button.addEventListener("click", () => fetchOnButtonClick(`${baseURL}/beers/random`));
+}
+export function fetchOnButtonClick(url) {
+  fetchRandomBeer(url).then((randomBeers) => {
+    addRandomBeerToDom(randomBeers);
   });
 }
-function updatePage() {
+export function handleClickOnSeeMore(seeMore) {
+  seeMore.addEventListener("click", (e) => getIdandAddInfoContent(e));
+}
+function getIdandAddInfoContent(e) {
+  let beerId = e.target.id;
   pageContent.classList.add("block");
   infoPage.classList.remove("block");
   infoPage.classList.add("infoPage");
-}
-const ipageContent = document.querySelector(".infop");
-
-export function getSingleBeerWithId(beerId) {
   console.log(beerId);
-  fetchSingleBeer(`https://api.punkapi.com/v2/beers/${beerId}`).then((singleBeer) => {
+  fetchRandomBeer(`${baseURL}/beers/${beerId}`).then((singleBeer) => {
     addSingleBeerToDom(singleBeer);
   });
 }
+const ipageContent = document.querySelector(".infop");
 
 function addSingleBeerToDom(singleBeer) {
   console.log(singleBeer);

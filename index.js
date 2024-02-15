@@ -1,12 +1,7 @@
-import { fetchRandomBeer } from "./randomBeer.js";
-import { addRandomBeerToDom} from "./utilities.js";
+import { fetchOnButtonClick } from "./utilities.js";
 
 
-
- fetchRandomBeer("https://api.punkapi.com/v2/beers/random").then((randomBeers) => {
-  addRandomBeerToDom(randomBeers);
-});
-
+ fetchOnButtonClick("https://api.punkapi.com/v2/beers/random");
 
 
 
