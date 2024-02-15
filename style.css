@@ -12,6 +12,7 @@
 nav {
   display: flex;
   justify-content: flex-end;
+  margin-inline: 900px 0;
 }
 .cardAndButton {
   display: flex;
@@ -24,6 +25,8 @@ nav {
   flex-direction: column;
   background-color: #fff;
   border-color: transparent;
+  max-width: 190px;
+  overflow-x: hidden;
   border-radius: 4px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 28px;

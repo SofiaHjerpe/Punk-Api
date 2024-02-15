@@ -2,6 +2,7 @@ import { pageContent } from "./randomBeer.js";
 import { fetchRandomBeer } from "./randomBeer.js";
 
 const infoPage = document.querySelector(".block");
+const searchPage = document.querySelector(".searchPage");
 const baseURL = "https://api.punkapi.com/v2";
 export async function addRandomBeerToDom(randomBeer) {
   let getRandomBeerToDom = randomBeer
@@ -13,7 +14,7 @@ export async function addRandomBeerToDom(randomBeer) {
       };
 
       return `
-           <nav><a>search</a></nav>
+           <nav><a href="#" class="search">search</a></nav>
            <section class="cardAndButton">
            <div class="card">
            <img class="image" src="${beerCard.imgSrc}"/>
@@ -35,20 +36,22 @@ export async function addRandomBeerToDom(randomBeer) {
 
   const seeMore = document.querySelector(".seeMore");
   const button = document.querySelector(".button");
-  onButtonClick(button);
-  handleClickOnSeeMore(seeMore);
+  const searchPageLink = document.querySelector(".search");
+  handleClickOnItems(seeMore, button, searchPageLink);
 }
-function onButtonClick(button) {
+
+// Event listeners
+function handleClickOnItems(seeMore, button, searchPageLink) {
+  seeMore.addEventListener("click", (e) => getIdandAddInfoContent(e));
   button.addEventListener("click", () => fetchOnButtonClick(`${baseURL}/beers/random`));
+  searchPageLink.addEventListener("click", () => relocateToSearch());
 }
 export function fetchOnButtonClick(url) {
   fetchRandomBeer(url).then((randomBeers) => {
     addRandomBeerToDom(randomBeers);
   });
 }
-export function handleClickOnSeeMore(seeMore) {
-  seeMore.addEventListener("click", (e) => getIdandAddInfoContent(e));
-}
+
 function getIdandAddInfoContent(e) {
   let beerId = e.target.id;
   pageContent.classList.add("block");
@@ -58,6 +61,11 @@ function getIdandAddInfoContent(e) {
   fetchRandomBeer(`${baseURL}/beers/${beerId}`).then((singleBeer) => {
     addSingleBeerToDom(singleBeer);
   });
+}
+function relocateToSearch() {
+  pageContent.classList.add("block");
+  infoPage.classList.add("block");
+  searchPage.classList.remove("block");
 }
 const ipageContent = document.querySelector(".infop");
 
