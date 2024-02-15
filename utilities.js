@@ -14,7 +14,7 @@ export async function addRandomBeerToDom(randomBeer) {
       };
 
       return `
-           <nav><a href="#" class="search">search</a></nav>
+           <nav><a href="#" class="search">Go To Search</a></nav>
            <section class="cardAndButton">
            <div class="card">
            <img class="image" src="${beerCard.imgSrc}"/>
@@ -26,7 +26,7 @@ export async function addRandomBeerToDom(randomBeer) {
            </a>
           </div>
           <div class="buttonWrapper">
-             <button class="button">Click me</button>
+             <button class="button">Random Beer</button>
           </div>
            </section>
            `;
