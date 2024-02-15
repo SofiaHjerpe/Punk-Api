@@ -2,73 +2,42 @@
   padding: 0;
   margin: 0;
 }
-
 .pageContent {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 }
 nav {
   display: flex;
   justify-content: flex-end;
-  margin-inline: 900px 0;
-  margin-top: 30px;
+  margin: 30px;
+  margin-inline: 310px;
 }
 .cardAndButton {
   display: flex;
   justify-content: space-between;
   width: 900px;
-  margin-top: 100px;
+  align-self: center;
 }
 .card {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  border-color: transparent;
-  max-width: 190px;
-  overflow-x: hidden;
+  max-width: 150px;
+  max-height: 550px;
+  overflow: hidden;
   border-radius: 4px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 28px;
+  padding: 32px;
 }
 .image {
   width: 150px;
   height: 390px;
 }
+/* button */
 .buttonWrapper {
   display: flex;
   justify-content: center;
   align-self: center;
-}
-.infoPageContent {
-  display: flex;
-  justify-content: column;
-}
-.block {
-  display: none;
-}
-.info-container {
-  display: flex;
-  flex-direction: column;
-  padding: 32px;
-  max-width: 900px;
-}
-.heading {
-  margin-top: 20px;
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 29px;
-}
-.small-heading {
-  margin-bottom: 5px;
-  margin-top: 5px;
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 20px;
-}
-.bear-name {
-  margin-bottom: 60px;
 }
 .button {
   font-family: "Inter", sans-serif;
@@ -83,14 +52,53 @@ nav {
 .button:hover {
   opacity: 0.5;
 }
+.block {
+  display: none;
+}
+.heading {
+  margin-top: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 29px;
+}
+.small-heading {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+}
+.bear-name {
+  margin-bottom: 60px;
+}
+/* info page */
+.infoPageContent {
+  display: flex;
+  justify-content: column;
+}
+.infop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+}
+.info-container {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  max-width: 900px;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 32px;
+  background-color: #fff;
+}
 .info-text {
   font-family: "Inter", sans-serif;
   line-height: 1.5em;
 }
 .info {
   font-family: "Inter", sans-serif;
-  font-weight: 500;
 }
+/* links */
 .seeMore,
 .search {
   color: #000;

@@ -80,7 +80,7 @@ function addSingleBeerToDom(singleBeer) {
         description: `${beer.description}`,
         abv: `${beer.abv}`,
         volume: `${beer.volume.value} ${beer.volume.unit}`,
-        ingredients: `${beer.ingredients.yeast}${beer.ingredients.malt[0].name} ${beer.ingredients.malt[0].amount.value} ${beer.ingredients.malt[0].amount.unit}`,
+        ingredients: `${beer.ingredients.yeast}, ${beer.ingredients.malt[0].name} ${beer.ingredients.malt[0].amount.value} ${beer.ingredients.malt[0].amount.unit},`,
         hops: `${beer.ingredients.hops[0].name} ${beer.ingredients.hops[0].amount.value} ${beer.ingredients.hops[0].amount.unit}, ${beer.ingredients.hops[1].name} ${beer.ingredients.hops[1].amount.value} ${beer.ingredients.hops[1].amount.unit}`,
         food_pairing: `${beer.food_pairing}`,
         brewersTips: `${beer.brewers_tips}`,
