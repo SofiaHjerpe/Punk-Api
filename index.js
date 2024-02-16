@@ -1,7 +1,7 @@
-import { fetchOnButtonClick } from "./utilities.js";
+import { fetchOnChange } from "./utilities.js";
 
 
- fetchOnButtonClick("https://api.punkapi.com/v2/beers/random");
+ fetchOnChange("https://api.punkapi.com/v2/beers/random");
 
 
 

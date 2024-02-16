@@ -1,5 +1,5 @@
 export const pageContent = document.querySelector(".pageContent");
-export async function fetchRandomBeer(url) {
+export async function fetchBeer(url) {
   try {
     const response = await fetch(url);
     const data = await response.json();

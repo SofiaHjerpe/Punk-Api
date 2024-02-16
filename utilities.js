@@ -1,9 +1,13 @@
 import { pageContent } from "./randomBeer.js";
-import { fetchRandomBeer } from "./randomBeer.js";
+import { fetchBeer } from "./randomBeer.js";
 
 const infoPage = document.querySelector(".block");
 const searchPage = document.querySelector(".searchPage");
+const form = document.querySelector(".form");
+const searchInput = document.querySelector(".search");
+const listOfBeerNames = document.querySelector(".list-of-names");
 const baseURL = "https://api.punkapi.com/v2";
+let searchedName;
 export async function addRandomBeerToDom(randomBeer) {
   let getRandomBeerToDom = randomBeer
     .map((randomBeer) => {
@@ -14,7 +18,7 @@ export async function addRandomBeerToDom(randomBeer) {
       };
 
       return `
-           <nav><a href="#" class="search">Go To Search</a></nav>
+           <nav><a href="#search" class="search">Go To Search</a></nav>
            <section class="cardAndButton">
            <div class="card">
            <img class="image" src="${beerCard.imgSrc}"/>
@@ -43,11 +47,11 @@ export async function addRandomBeerToDom(randomBeer) {
 // Event listeners
 function handleClickOnItems(seeMore, button, searchPageLink) {
   seeMore.addEventListener("click", (e) => getIdandAddInfoContent(e));
-  button.addEventListener("click", () => fetchOnButtonClick(`${baseURL}/beers/random`));
+  button.addEventListener("click", () => fetchOnChange(`${baseURL}/beers/random`));
   searchPageLink.addEventListener("click", () => relocateToSearch());
 }
-export function fetchOnButtonClick(url) {
-  fetchRandomBeer(url).then((randomBeers) => {
+export function fetchOnChange(url) {
+  fetchBeer(url).then((randomBeers) => {
     addRandomBeerToDom(randomBeers);
   });
 }
@@ -58,7 +62,7 @@ function getIdandAddInfoContent(e) {
   infoPage.classList.remove("block");
   infoPage.classList.add("infoPage");
   console.log(beerId);
-  fetchRandomBeer(`${baseURL}/beers/${beerId}`).then((singleBeer) => {
+  fetchBeer(`${baseURL}/beers/${beerId}`).then((singleBeer) => {
     addSingleBeerToDom(singleBeer);
   });
 }
@@ -105,4 +109,31 @@ function addSingleBeerToDom(singleBeer) {
     })
     .join("");
   ipageContent.insertAdjacentHTML("beforeend", singleBeerToDom);
+}
+
+// search on a beer
+// beer_name;
+form.addEventListener("submit", () => {
+  let searchUserInput = searchInput.value;
+  console.log(searchUserInput);
+
+  let searchUrl = `${baseURL}/beers?beer_name=${searchUserInput}&page=1&per_page=10`;
+  fetchBeer(searchUrl).then((searchedBeers) => {
+    addSearchedBeersToDom(searchedBeers);
+  });
+});
+
+function addSearchedBeersToDom(searchedBeers) {
+  let getSearchBeerToDom = searchedBeers
+    .map((searchedBeer) => {
+      const beerName = {
+        name: `${searchedBeer.name}`,
+      };
+
+      return `
+    <h4 class="beerName"> ${beerName.name}
+    `;
+    })
+    .join("");
+  listOfBeerNames.innerHTML = getSearchBeerToDom;
 }
