@@ -14,6 +14,7 @@ export const rightArrow = document.querySelector(".material-symbols-outlined:nth
 
 let pageIndex = 1;
 let pageNumber = 1;
+let totalPages = 1;
 let searchUserInput;
 
 export async function addRandomBeerToDom(randomBeer) {
@@ -81,6 +82,9 @@ function relocateToSearch() {
   if (pageNumber === 1) {
     leftArrow.style.color = "#e2cbec";
   }
+  if (pageNumber === totalPages) {
+    rightArrow.style.color = "#e2cbec";
+  }
 }
 const ipageContent = document.querySelector(".infop");
 
@@ -125,7 +129,10 @@ function addSingleBeerToDom(singleBeer) {
 // search on a beer
 function fetchSearchedBeers(searchUrl) {
   fetchBeer(searchUrl).then((searchedBeers) => {
+    searchedBeers.length < 9 ? (totalPages = pageIndex) : (totalPages = searchedBeers.length);
+
     addSearchedBeersToDom(searchedBeers);
+    pagesNav.innerHTML = `${pageNumber}  `;
   });
 }
 form.addEventListener("submit", () => {
@@ -152,15 +159,22 @@ function addSearchedBeersToDom(searchedBeers) {
   listOfBeerNames.innerHTML = getSearchBeerToDom;
 }
 
-export function newPage(e) {
-  if (e.target === rightArrow && pageIndex <= 8) {
+function goToTheRight(e) {
+  if (e.target === rightArrow && pageIndex < totalPages) {
+    if (pageIndex === totalPages) {
+      return;
+    }
     pageIndex++;
     fetchSearchedBeers(
       `${baseURL}/beers?beer_name=${searchUserInput}&page=${pageIndex}&per_page=10`
     );
+
     pageNumber = parseInt(pageIndex);
-    pagesNav.innerHTML = `${pageNumber} / 8 `;
-  } else if (e.target === leftArrow) {
+    pagesNav.innerHTML = `${pageNumber}`;
+  }
+}
+function goToTheLeft(e) {
+  if (e.target === leftArrow) {
     if (pageIndex === 1) {
       return;
     } else {
@@ -168,18 +182,18 @@ export function newPage(e) {
       fetchSearchedBeers(
         `${baseURL}/beers?beer_name=${searchUserInput}&page=${pageIndex}&per_page=10`
       );
+
       pageNumber = parseInt(pageIndex);
-      pagesNav.innerHTML = `${pageNumber} / 8 `;
+      pagesNav.innerHTML = `${pageNumber}  `;
     }
   }
-  if (pageNumber === 1) {
-    leftArrow.style.color = "#e2cbec";
-  } else {
-    leftArrow.style.color = "#47167c";
+}
+
+export function newPage(e) {
+  if (pageIndex >= totalPages) {
+    goToTheLeft(e);
   }
-  if (pageNumber === 6) {
-    rightArrow.style.color = "#e2cbec";
-  } else {
-    rightArrow.style.color = "#47167c";
-  }
+
+  goToTheRight(e);
+  goToTheLeft(e);
 }
