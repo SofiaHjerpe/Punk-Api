@@ -7,7 +7,15 @@ const form = document.querySelector(".form");
 const searchInput = document.querySelector(".search");
 const listOfBeerNames = document.querySelector(".list-of-names");
 const baseURL = "https://api.punkapi.com/v2";
-let searchedName;
+const pagesNav = document.querySelector(".pages-nav");
+export const leftArrow = document.querySelector(".material-symbols-outlined:nth-of-type(1)");
+export const rightArrow = document.querySelector(".material-symbols-outlined:nth-of-type(2)");
+
+let pageIndex = 1;
+let pageNumber = 1;
+let searchUserInput;
+
+
 export async function addRandomBeerToDom(randomBeer) {
   let getRandomBeerToDom = randomBeer
     .map((randomBeer) => {
@@ -112,15 +120,17 @@ function addSingleBeerToDom(singleBeer) {
 }
 
 // search on a beer
-// beer_name;
-form.addEventListener("submit", () => {
-  let searchUserInput = searchInput.value;
-  console.log(searchUserInput);
-
-  let searchUrl = `${baseURL}/beers?beer_name=${searchUserInput}&page=1&per_page=10`;
+function fetchSearchedBeers(searchUrl) {
   fetchBeer(searchUrl).then((searchedBeers) => {
     addSearchedBeersToDom(searchedBeers);
   });
+}
+form.addEventListener("submit", () => {
+  searchUserInput = searchInput.value;
+  console.log(searchUserInput);
+
+  let searchUrl = `${baseURL}/beers?beer_name=${searchUserInput}&page=1&per_page=10`;
+  fetchSearchedBeers(searchUrl);
 });
 
 function addSearchedBeersToDom(searchedBeers) {
@@ -136,4 +146,26 @@ function addSearchedBeersToDom(searchedBeers) {
     })
     .join("");
   listOfBeerNames.innerHTML = getSearchBeerToDom;
+}
+
+export function newPage(e) {
+  if (e.target === rightArrow && pageIndex <= 8) {
+    pageIndex++;
+    fetchSearchedBeers(
+      `${baseURL}/beers?beer_name=${searchUserInput}&page=${pageIndex}&per_page=10`
+    );
+    pageNumber = parseInt(pageIndex);
+    pagesNav.innerHTML = `${pageNumber} / 9 `;
+  } else if (e.target === leftArrow) {
+    if (pageIndex === 1) {
+      return;
+    } else {
+      pageIndex--;
+      fetchSearchedBeers(
+        `${baseURL}/beers?beer_name=${searchUserInput}&page=${pageIndex}&per_page=10`
+      );
+      pageNumber = parseInt(pageIndex);
+      pagesNav.innerHTML = `${pageNumber} / 9 `;
+    }
+  }
 }
