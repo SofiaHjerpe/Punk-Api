@@ -8,13 +8,13 @@ const searchInput = document.querySelector(".search");
 const listOfBeerNames = document.querySelector(".list-of-names");
 const baseURL = "https://api.punkapi.com/v2";
 const pagesNav = document.querySelector(".pages-nav");
+const pagesNavigationContainer = document.querySelector(".pages-navigation");
 export const leftArrow = document.querySelector(".material-symbols-outlined:nth-of-type(1)");
 export const rightArrow = document.querySelector(".material-symbols-outlined:nth-of-type(2)");
 
 let pageIndex = 1;
 let pageNumber = 1;
 let searchUserInput;
-
 
 export async function addRandomBeerToDom(randomBeer) {
   let getRandomBeerToDom = randomBeer
@@ -32,7 +32,7 @@ export async function addRandomBeerToDom(randomBeer) {
            <img class="image" src="${beerCard.imgSrc}"/>
            <h4 class="small-heading bear-name">${beerCard.name}</h4>
            <a class="seeMore" href="index.html#${beerCard.index}" id="${beerCard.index}"> See More 
-           <span class="material-symbols-outlined">
+           <span class="material-symbols-outlined seeMorearrow">
                  keyboard_arrow_right
            </span>
            </a>
@@ -77,7 +77,10 @@ function getIdandAddInfoContent(e) {
 function relocateToSearch() {
   pageContent.classList.add("block");
   infoPage.classList.add("block");
-  searchPage.classList.remove("block");
+  searchPage.style.display = "flex";
+  if (pageNumber === 1) {
+    leftArrow.style.color = "#e2cbec";
+  }
 }
 const ipageContent = document.querySelector(".infop");
 
@@ -126,6 +129,7 @@ function fetchSearchedBeers(searchUrl) {
   });
 }
 form.addEventListener("submit", () => {
+  pagesNavigationContainer.style.display = "flex";
   searchUserInput = searchInput.value;
   console.log(searchUserInput);
 
@@ -155,7 +159,7 @@ export function newPage(e) {
       `${baseURL}/beers?beer_name=${searchUserInput}&page=${pageIndex}&per_page=10`
     );
     pageNumber = parseInt(pageIndex);
-    pagesNav.innerHTML = `${pageNumber} / 9 `;
+    pagesNav.innerHTML = `${pageNumber} / 8 `;
   } else if (e.target === leftArrow) {
     if (pageIndex === 1) {
       return;
@@ -165,7 +169,17 @@ export function newPage(e) {
         `${baseURL}/beers?beer_name=${searchUserInput}&page=${pageIndex}&per_page=10`
       );
       pageNumber = parseInt(pageIndex);
-      pagesNav.innerHTML = `${pageNumber} / 9 `;
+      pagesNav.innerHTML = `${pageNumber} / 8 `;
     }
+  }
+  if (pageNumber === 1) {
+    leftArrow.style.color = "#e2cbec";
+  } else {
+    leftArrow.style.color = "#47167c";
+  }
+  if (pageNumber === 6) {
+    rightArrow.style.color = "#e2cbec";
+  } else {
+    rightArrow.style.color = "#47167c";
   }
 }

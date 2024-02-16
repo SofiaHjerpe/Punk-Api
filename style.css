@@ -33,6 +33,7 @@ nav {
   width: 150px;
   height: 390px;
 }
+
 /* button */
 .buttonWrapper {
   display: flex;
@@ -115,6 +116,56 @@ nav {
 .seeMore:hover {
   opacity: 0.5;
 }
+/* icons */
+
 .material-symbols-outlined {
+  font-size: 30px;
+  color: #47167c;
+}
+.seeMorearrow {
   font-size: 15px;
+  color: #000;
+}
+/* search */
+.pages-navigation {
+  display: none;
+  align-items: center;
+}
+.pages-nav {
+  font-size: 22px;
+  font-family: "Inter", sans-serif;
+}
+.searchPage {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* search form */
+.form {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.form .search {
+  padding: 10px 15px;
+  width: 400px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 4px;
+  outline: none;
+  border-color: transparent;
+  font-size: 22px;
+}
+.form .search::placeholder {
+  color: #47167c;
+  padding: 10px 5px;
+}
+.form .search::placeholder:active {
+  color: #e2cbec;
+  padding: 10px 5px;
+}
+.beerName {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
